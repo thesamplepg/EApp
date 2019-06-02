@@ -6,8 +6,12 @@ const app = require('../../app');
 describe('Users api test', () => {
     before(done => {
         database.connect()
-            .then(() => done())
-            .catch(err => done(err));
+            .then(() => {
+              done()
+            })
+            .catch(err => {
+              done(err)
+            });
     });
 
     after(done => {
@@ -18,26 +22,35 @@ describe('Users api test', () => {
 
     describe('/api/signup', () => {
 
+      const user = {
+            fullName: 'Aktan',
+            email: 'aktan@gmail.com',
+            userName: 'aktanpg',
+            password: 'password'
+        }
+        
         it('should create a new user and push to database', done => {
-            const user = {
-                fullName: 'Aktan',
-                email: 'aktan@gmail.com',
-                userName: 'aktanpg',
-                password: 'password'
-            }
-
             request(app)
                 .post('/api/users/signup')
                 .send(user)
+                .expect(200)
                 .then(res => {
-                    expect(res).to.contain.property("_id");
-                    
-                    delete res._id;
-                    expect(res).to.deep.equal(user);
-
+                    expect(res.body).to.contain.property('success');
                     done();
                 })
                 .catch(err => done(err));
+        });
+
+        it('should return json with error "already exists"', done => {
+            request(app)
+              .post('/api/users/signup')
+              .send(user)
+              .expect(400)
+              .then(res => {
+                expect(res.body.error).to.equal('user already exists');
+                done();
+              })
+              .catch(err => done(err));
         });
     });
 });

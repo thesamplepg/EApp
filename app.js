@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const api = require('./api');
 const cookieParser = require('cookie-parser');
 
-if (process.env.NODE_ENV === 'development' && process.env.NODE_ENV === 'test') {
+if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
     require('dotenv').config();
 }
 

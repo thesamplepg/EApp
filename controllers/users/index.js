@@ -8,16 +8,16 @@ exports.createUser = async (req, res) => {
 
     const { userName, email, password, fullName } = req.body;
 
-    const fullNameValidation = validator.isLength(fullName, { min: 3, max: 35 });
-    const userNameValidation = validator.isLength(userName, { min: 5, max: 20 });
-    const emailValidation = validator.isEmail(email);
-    const passwordValidation = validator.isLength(password, { min: 6, max: 30 });
+    const fullNameValidation = validator.isLength(fullName || '', { min: 3, max: 35 });
+    const userNameValidation = validator.isLength(userName || '', { min: 5, max: 20 });
+    const emailValidation = validator.isEmail(email || '');
+    const passwordValidation = validator.isLength(password || '', { min: 6, max: 30 });
 
     if (userNameValidation && emailValidation && passwordValidation && fullNameValidation) {
 
         const isExist = await User.findOne({ email });
 
-        if (isExist) return res.json({ error: 'user already exists' });
+        if (isExist) return res.status(400).json({ error: 'user already exists' });
 
         const salt = crypt.genSaltSync(10);
         const hashedPassword = crypt.hashSync(password, salt);
@@ -44,14 +44,14 @@ exports.logInUser = async (req, res) => {
 
     const { email, password } = req.body;
 
-    const emailValidation = validator.isEmail(email);
-    const passwordValidation = validator.isLength(password, { min: 6, max: 30 });
+    const emailValidation = validator.isEmail(email || '');
+    const passwordValidation = validator.isLength(password || '', { min: 6, max: 30 });
 
     if (emailValidation && passwordValidation) {
 
         const user = await User.findOne({ email });
 
-        if (!user) return res.json({ error: 'email not found' });
+        if (!user) return res.status(404).json({ error: 'email not found' });
 
         const isPasswordsMatched = crypt.compareSync(password, user.password);
 
@@ -67,12 +67,12 @@ exports.logInUser = async (req, res) => {
 
             res.cookie('token', token, { maxAge: 900000 });
 
-            res.status(500).json({
+            res.status(200).json({
                 success: true
             });
 
         } else {
-            res.json(400).json({
+            res.status(400).json({
                 error: 'incorrect password'
             })
         }

@@ -15,7 +15,9 @@
     "dotenv": "^8.0.0",
     "mocha": "^6.1.4",
     "mocka": "0.0.1",
-    "mockgoose": "^8.0.2",
+    "mockgoose": "^8.0.1",
+    "mockgoose-fix": "^7.3.6",
+    "mongodb-memory-server": "^5.1.2",
     "nodemon": "^1.19.1",
     "supertest": "^4.0.2"
   }
