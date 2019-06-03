@@ -15,4 +15,10 @@ const MarkSchema = new mongoose.Schema({
     }
 });
 
+MarkSchema.methods.deleteIfThereIsNoEvent = () => {
+    if (!this.events.length) {
+        this.model("Mark").deleteOne({ id: this._id });
+    }
+};
+
 module.exports = mongoose.model("mark", MarkSchema);
