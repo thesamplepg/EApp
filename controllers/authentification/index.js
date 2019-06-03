@@ -80,8 +80,9 @@ exports.logInUser = async (req, res) => {
         if (isPasswordsMatched) {
             const tokenData = {
                 userName: user.userName,
-                fullNae: user.fullName,
-                avatar: user.avatar.url
+                fullName: user.fullName,
+                avatar: user.avatar.url,
+                id: user._id
             };
 
             const token = jwt.sign(tokenData, process.env.TOKEN_SECRET);
