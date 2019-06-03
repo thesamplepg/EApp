@@ -12,8 +12,8 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
-app.use(decodeJWT);
 app.use(logger);
+app.use(decodeJWT);
 
 api(app);
 

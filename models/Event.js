@@ -17,8 +17,8 @@ const EventSchema = new mongoose.Schema({
         required: true
     },
     image: {
-        img: { type: String, require: true },
-        imgId: { type: String, require: true }
+        img: { type: String, default: "imagesr" },
+        imgId: { type: String, default: "" }
     },
     mambers: {
         type: Array,
