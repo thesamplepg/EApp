@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const Event = require('./Event');
+const mongoose = require("mongoose");
+const Event = require("./Event");
 
 const MarkSchema = new mongoose.Schema({
     longitude: {
@@ -16,4 +16,4 @@ const MarkSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('mark', MarkSchema);
+module.exports = mongoose.model("mark", MarkSchema);

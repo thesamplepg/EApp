@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const Event = require('./Event');
+const mongoose = require("mongoose");
+const Event = require("./Event");
 
 const UserSchema = new mongoose.Schema({
     fullName: {
@@ -27,13 +27,13 @@ const UserSchema = new mongoose.Schema({
     avatar: {
         url: {
             type: String,
-            default: 'https://atnpolis.kg/image/default_user.png'
+            default: "https://atnpolis.kg/image/default_user.png"
         },
         id: {
             type: String,
-            default: ''
+            default: ""
         }
     }
 });
 
-module.exports = mongoose.model('user', UserSchema);
+module.exports = mongoose.model("user", UserSchema);

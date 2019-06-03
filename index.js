@@ -1,16 +1,17 @@
-const database = require('./database');
-const app = require('./app');
+const database = require("./database");
+const app = require("./app");
 
 const port = process.env.PORT || 5000;
 
-database.connect()
+database
+    .connect()
     .then(message => {
         console.log(message);
 
-        app.listen(port, (err) => {
+        app.listen(port, err => {
             if (err) return console.log(err);
 
-            console.log('__[ Server started ]__');
+            console.log("__[ Server started ]__");
         });
     })
     .catch(err => {
