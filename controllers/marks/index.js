@@ -13,15 +13,15 @@ exports.createMark = async (req, res) => {
 	const newMark = new Mark(mark);
 	const newEvent = new Event(event);
 
-	newMark.events.push(mark);
+	newMark.events.push(newEvent._id);
 	newEvent.mark = mark;
-	newEvent.creater = req.user._id;
+	newEvent.creater = req.user.id;
 
-	const createdMark = await newMark.save();
+	await newMark.save();
 	await newEvent.save();
 
 	res.status(200).json({
 		created: true,
-		...createdMark
+		mark: newMark
 	});
 };
