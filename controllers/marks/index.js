@@ -1,20 +1,15 @@
 const Mark = require("../../models/Mark");
 const Event = require("../../models/Event");
 
-exports.getAllMarks = async (req, res) => {
+exports.getMarks = async (req, res) => {
 	try {
-		const marks = await Mark.find({});
-		res.status(200).json({ marks });
-	} catch (err) {
-		console.log(err);
-		res.status(500).json({ error: "Something went wrong" });
-	}
-};
-
-exports.getMarkByLocation = async (req, res) => {
-	try {
-		const mark = await Mark.findOne(req.query);
-		res.status(200).json({ mark });
+		if (req.query) {
+			const mark = await Mark.findOne(req.query);
+			res.status(200).json({ mark });
+		} else {
+			const marks = await Mark.find({});
+			res.status(200).json({ marks });
+		}
 	} catch (err) {
 		console.log(err);
 		res.status(500).json({ error: "Something went wrong" });
