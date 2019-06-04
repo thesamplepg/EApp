@@ -11,6 +11,16 @@ exports.getAllMarks = async (req, res) => {
 	}
 };
 
+exports.getMarkByLocation = async (req, res) => {
+	try {
+		const mark = await Mark.findOne(req.query);
+		res.status(200).json({ mark });
+	} catch (err) {
+		console.log(err);
+		res.status(500).json({ error: "Something went wrong" });
+	}
+};
+
 exports.createMark = async (req, res) => {
 	const { mark, event } = req.body;
 
