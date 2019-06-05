@@ -1,7 +1,7 @@
 const Event = require("../../models/Event");
 const Mark = require("../../models/Mark");
 
-exports.createEvnet = async (req, res) => {
+exports.createEvent = async (req, res) => {
 	const { id } = req.body;
 
 	const mark = await Mark.findOneById(id);
