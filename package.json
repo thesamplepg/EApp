@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "NODE_ENV=test mocha tests/**/*.js --timeout 60000",
-    "dev": "NODE_ENV=development nodemon index.js"
+    "dev": "NODE_ENV=development nodemon index.js",
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",
@@ -20,5 +21,8 @@
     "mongodb-memory-server": "^5.1.2",
     "nodemon": "^1.19.1",
     "supertest": "^4.0.2"
+  },
+  "dependencies": {
+    "cors": "^2.8.5"
   }
 }
